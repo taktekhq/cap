@@ -194,7 +194,11 @@ func cmdCheck(args []string, stdout, stderr io.Writer) int {
 		case Unknown:
 			why = res.Reason
 		}
-		fmt.Fprintf(tw, "%s\t%s\t%s\n", res.Outcome, res.Page.ID, why)
+		if why == "" {
+			fmt.Fprintf(tw, "%s\t%s\n", res.Outcome, res.Page.ID)
+		} else {
+			fmt.Fprintf(tw, "%s\t%s\t%s\n", res.Outcome, res.Page.ID, why)
+		}
 		if *verbose && res.Outcome == Failing && res.Stderr != "" {
 			tw.Flush()
 			for _, l := range strings.Split(tail(res.Stderr, 400), "\n") {
