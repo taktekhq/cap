@@ -142,17 +142,17 @@ func TestEditFrontMatterInsertAndDelete(t *testing.T) {
 	if string(out) != want {
 		t.Errorf("got:\n%s\nwant:\n%s", out, want)
 	}
-	// And back to verified: last_error goes, last_verified lands after status.
+	// And back to verified: last_checked and last_error go, last_verified lands after status.
 	out2, _, err := EditFrontMatter(out, []Edit{
 		{Key: "status", Value: "verified"},
 		{Key: "last_verified", Value: "2026-11-10"},
-		{Key: "last_checked", Value: "2026-11-10"},
+		{Key: "last_checked", Delete: true},
 		{Key: "last_error", Delete: true},
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	want2 := "---\nid: x\nstatus: verified\nlast_verified: 2026-11-10\nlast_checked: 2026-11-10\nkind: api\n---\nbody\n"
+	want2 := "---\nid: x\nstatus: verified\nlast_verified: 2026-11-10\nkind: api\n---\nbody\n"
 	if string(out2) != want2 {
 		t.Errorf("got:\n%s\nwant:\n%s", out2, want2)
 	}

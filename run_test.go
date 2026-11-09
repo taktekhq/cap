@@ -153,7 +153,7 @@ func TestWriteResults(t *testing.T) {
 		t.Errorf("changed %v", changed)
 	}
 	read := func(p string) string { b, _ := os.ReadFile(p); return string(b) }
-	if got := read(okPath); got != "---\nid: ok\nstatus: verified\nlast_verified: 2026-11-09\nlast_checked: 2026-11-09\ncheck: 'true'\n---\nbody\n" {
+	if got := read(okPath); got != "---\nid: ok\nstatus: verified\nlast_verified: 2026-11-09\ncheck: 'true'\n---\nbody\n" {
 		t.Errorf("ok page:\n%s", got)
 	}
 	if got := read(badPath); got != "---\nid: bad\nstatus: failing\nlast_verified: 2026-01-01\nlast_checked: 2026-11-09\nlast_error: \"exit 2\"\ncheck: 'exit 2'\n---\nbody\n" {

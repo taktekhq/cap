@@ -37,8 +37,8 @@ adb -s 100.108.31.45:5555 shell ...
 | `check_on` | Where to run it: `local` (default) or an ssh host (`mac`, `user@box`). Your own hostname also counts as local. |
 | `status` | Written by `cap check --write`: `verified`, `failing`, `unknown` or `doc`. Set `retired` yourself for things that are gone; retired pages never run. |
 | `last_verified` | Written: the last day the check passed. |
-| `last_checked` | Written: the last day the check ran (pass or not). |
-| `last_error` | Written: one line on why it did not pass (exit code, last stderr line). Removed on the next pass. |
+| `last_checked` | Written when a check does not pass: the day it ran. Removed on the next pass. |
+| `last_error` | Written with `last_checked`: one line on why (exit code, last stderr line). Removed on the next pass. |
 
 ## Commands
 

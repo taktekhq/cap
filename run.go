@@ -292,14 +292,16 @@ func Summary(results []Result) string {
 	return strings.Join(parts, " ")
 }
 
-// EditsFor is what --write changes in a page for its result.
+// EditsFor is what --write changes in a page for its result. A pass sets
+// last_verified and clears last_checked and last_error, so those two always
+// describe the latest check that did not pass.
 func EditsFor(res Result, today string) []Edit {
 	switch res.Outcome {
 	case Verified:
 		return []Edit{
 			{Key: "status", Value: Verified},
 			{Key: "last_verified", Value: today},
-			{Key: "last_checked", Value: today},
+			{Key: "last_checked", Delete: true},
 			{Key: "last_error", Delete: true},
 		}
 	case Failing, Unknown:

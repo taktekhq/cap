@@ -32,8 +32,10 @@ Each page is a Markdown file with YAML front matter. cap reads these fields:
   status:    verified, failing, unknown, doc or retired (retired pages never run)
 
 cap check never prints a check's output. --verbose adds the tail of stderr.
---write updates status, last_verified, last_checked and last_error in the
-front matter and changes nothing else.
+--write records the result in the front matter and changes nothing else:
+a pass sets status: verified and last_verified (today); a failure sets
+status: failing, last_checked and a one-line last_error; an unreachable
+host sets status: unknown the same way; check: none sets status: doc.
 
 Flags:
   --dir DIR      the folder of pages (default $CAP_DIR, else .)
